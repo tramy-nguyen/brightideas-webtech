@@ -3,6 +3,7 @@ package de.htwberlin.webtech.brightideas.service;
 import de.htwberlin.webtech.brightideas.persistence.FlashcardEntity;
 import de.htwberlin.webtech.brightideas.persistence.FlashcardRepository;
 import de.htwberlin.webtech.brightideas.web.Flashcard;
+import de.htwberlin.webtech.brightideas.web.FlashcardManipulationRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,16 +21,52 @@ public class FlashcardService {
     public List<Flashcard> findAll() {
        List<FlashcardEntity> flashcards = flashcardRepository.findAll();
        return flashcards.stream()
-               .map(FlashcardEntity -> new Flashcard(
-                       FlashcardEntity.getId(),
-                       FlashcardEntity.getQuestion(),
-                       FlashcardEntity.getAnswer(),
-                       FlashcardEntity.getOptions(),
-                       FlashcardEntity.isFlip(),
-                       FlashcardEntity.getCategory()
-
-               ))
+               .map(this:: transformEntity)
                .collect(Collectors.toList());
     }
 
+    public Flashcard findById(Long id) {
+        var flashcardEntity = flashcardRepository.findById(id);
+        return flashcardEntity.isPresent()? transformEntity(flashcardEntity.get()) : null;
+    }
+
+    public Flashcard create(FlashcardManipulationRequest request){
+        var flashcardEntity = new FlashcardEntity(request.getQuestion(), request.getAnswer(), request.getOptions(),request.isFlip(),request.getCategory());
+        flashcardEntity  =flashcardRepository.save(flashcardEntity);
+        return transformEntity(flashcardEntity);
+    }
+    public Flashcard update(Long id, FlashcardManipulationRequest request) {
+        var flashcardEntityOptional = flashcardRepository.findById(id);
+        if(flashcardEntityOptional.isEmpty()){
+            return null;
+        }
+
+        var flashcardEntity = flashcardEntityOptional.get();
+        flashcardEntity.setQuestion(request.getQuestion());
+        flashcardEntity.setAnswer(request.getQuestion());
+        flashcardEntity.setOptions(request.getOptions());
+        flashcardEntity.setFlip(request.isFlip());
+        flashcardEntity.setCategory(request.getCategory());
+        flashcardEntity = flashcardRepository.save(flashcardEntity);
+
+        return transformEntity(flashcardEntity);
+    }
+
+    public boolean deleteById(Long id) {
+        if(!flashcardRepository.existsById(id)) {
+            return false;
+        }
+        flashcardRepository.deleteById(id);
+        return true;
+    }
+    private Flashcard transformEntity(FlashcardEntity flashcardEntity){
+        return new Flashcard(
+                flashcardEntity.getId(),
+                flashcardEntity.getQuestion(),
+                flashcardEntity.getAnswer(),
+                flashcardEntity.getOptions(),
+                flashcardEntity.isFlip(),
+                flashcardEntity.getCategory()
+        );
+    }
 }

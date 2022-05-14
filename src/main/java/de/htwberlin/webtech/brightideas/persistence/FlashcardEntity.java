@@ -25,8 +25,7 @@ public class FlashcardEntity {
     @Column(name = "category")
     private String category;
 
-    public FlashcardEntity (long id, String question, String answer, String options, boolean flip, String category) {
-        this.id = id;
+    public FlashcardEntity (String question, String answer, String options, boolean flip, String category) {
         this.question = question;
         this.answer = answer;
         this.options = options;
