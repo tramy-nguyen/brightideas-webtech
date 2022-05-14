@@ -1,6 +1,6 @@
 package de.htwberlin.webtech.brightideas.web;
 
-public class FlashcardCreateRequest {
+public class FlashcardManipulationRequest {
 
     private String question;
     private String answer;
@@ -8,7 +8,7 @@ public class FlashcardCreateRequest {
     private boolean flip;
     private String category;
 
-    public FlashcardCreateRequest(String question, String answer, String options, boolean flip, String category) {
+    public FlashcardManipulationRequest(String question, String answer, String options, boolean flip, String category) {
         this.question = question;
         this.answer = answer;
         this.options = options;

@@ -1,5 +1,5 @@
-[![Java CI with Gradle](https://github.com/tramy-nguyen/brightideas-webtech/actions/workflows/tests.yml/badge.svg)](https://github.com/tramy-nguyen/brightideas-webtech/actions/workflows/tests.yml)[![Java CI with Gradle](https://github.com/tramy-nguyen/brightideas-webtech/actions/workflows/tests.yml/badge.svg)](https://github.com/tramy-nguyen/brightideas-webtech/actions/workflows/tests.yml)
-
+[![Java CI with Gradle](https://github.com/tramy-nguyen/brightideas-webtech/actions/workflows/tests.yml/badge.svg)](https://github.com/tramy-nguyen/brightideas-webtech/actions/workflows/tests.yml)
+git 
 # brightideas-webtech
 ***
 Description
