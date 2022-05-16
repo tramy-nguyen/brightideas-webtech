@@ -26,7 +26,7 @@ public class FlashcardRestController {
     }
 
     @GetMapping(path = "/api/v1/flashcards/{id}")
-    public ResponseEntity<Flashcard> fetchFlashcardById(@PathVariable long Id) {
+    public ResponseEntity<Flashcard> fetchFlashcardById(@PathVariable Long Id) {
         var flashcard = flashcardService.findById(Id);
 
         return flashcard != null? ResponseEntity.ok(flashcard) : ResponseEntity.notFound().build();
@@ -41,13 +41,13 @@ public class FlashcardRestController {
     }
 
     @PutMapping(path = "/api/v1/flashcards/{id}")
-    public ResponseEntity<Flashcard> updateFlashcard(@PathVariable long id, @RequestBody FlashcardManipulationRequest request){
+    public ResponseEntity<Flashcard> updateFlashcard(@PathVariable Long id, @RequestBody FlashcardManipulationRequest request){
         var flashcard = flashcardService.update(id, request);
         return flashcard != null? ResponseEntity.ok(flashcard) : ResponseEntity.notFound().build();
     }
 
     @DeleteMapping(path = "/api/v1/flashcards/{id}")
-    public ResponseEntity<Void> deletePerson(@PathVariable long id) {
+    public ResponseEntity<Void> deletePerson(@PathVariable Long id) {
         boolean deleted = flashcardService.deleteById(id);
         return deleted? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
