@@ -21,8 +21,7 @@ public class FlashcardRestController {
 
     @GetMapping(path = "/api/v1/flashcards")
     public ResponseEntity<List<Flashcard>> fetchFlashcards() {
-        var flashcards= flashcardService.findAll();
-        return ResponseEntity.ok(flashcards);
+        return ResponseEntity.ok(flashcardService.findAll());
     }
 
     @GetMapping(path = "/api/v1/flashcards/{id}")
