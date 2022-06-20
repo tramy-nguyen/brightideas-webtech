@@ -25,8 +25,8 @@ public class FlashcardRestController {
     }
 
     @GetMapping(path = "/api/v1/flashcards/{id}")
-    public ResponseEntity<Flashcard> fetchFlashcardById(@PathVariable Long Id) {
-        var flashcard = flashcardService.findById(Id);
+    public ResponseEntity<Flashcard> fetchFlashcardById(@PathVariable Long id) {
+        var flashcard = flashcardService.findById(id);
 
         return flashcard != null? ResponseEntity.ok(flashcard) : ResponseEntity.notFound().build();
     }
