@@ -5,16 +5,12 @@ public class Flashcard {
     private long id;
     private String question;
     private String answer;
-    private String options;
-    private boolean flip;
     private String category;
 
-    public Flashcard(long id, String question, String answer, String options, boolean flip, String category) {
+    public Flashcard(long id, String question, String answer, String category) {
         this.id = id;
         this.question = question;
         this.answer = answer;
-        this.options = options;
-        this.flip = flip;
         this.category = category;
     }
 
@@ -40,22 +36,6 @@ public class Flashcard {
 
     public void setAnswer(String answer) {
         this.answer = answer;
-    }
-
-    public String getOptions() {
-        return options;
-    }
-
-    public void setOptions(String options) {
-        this.options = options;
-    }
-
-    public boolean isFlip() {
-        return flip;
-    }
-
-    public void setFlip(boolean flip) {
-        this.flip = flip;
     }
 
     public String getCategory() {

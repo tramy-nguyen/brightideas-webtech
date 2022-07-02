@@ -16,20 +16,12 @@ public class FlashcardEntity {
     @Column(name = "answer", nullable = false)
     private String answer;
 
-    @Column(name = "options")
-    private String options;
-
-    @Column(name = "flip", nullable = false)
-    private boolean flip;
-
     @Column(name = "category")
     private String category;
 
-    public FlashcardEntity (String question, String answer, String options, boolean flip, String category) {
+    public FlashcardEntity (String question, String answer, String category) {
         this.question = question;
         this.answer = answer;
-        this.options = options;
-        this.flip = flip;
         this.category = category;
     }
 
@@ -54,22 +46,6 @@ public class FlashcardEntity {
 
     public void setAnswer(String answer) {
         this.answer = answer;
-    }
-
-    public String getOptions() {
-        return options;
-    }
-
-    public void setOptions(String options) {
-        this.options = options;
-    }
-
-    public boolean isFlip() {
-        return flip;
-    }
-
-    public void setFlip(boolean flip) {
-        this.flip = flip;
     }
 
     public String getCategory() {

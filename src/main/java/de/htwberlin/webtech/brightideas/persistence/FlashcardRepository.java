@@ -8,5 +8,4 @@ import java.util.List;
 @Repository
 public interface FlashcardRepository extends JpaRepository<FlashcardEntity,Long> {
 
-    List<FlashcardEntity> findAllByQuestion(String question);
 }

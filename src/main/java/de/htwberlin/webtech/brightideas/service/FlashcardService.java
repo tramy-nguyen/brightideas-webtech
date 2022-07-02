@@ -31,7 +31,7 @@ public class FlashcardService {
     }
 
     public Flashcard create(FlashcardManipulationRequest request){
-        var flashcardEntity = new FlashcardEntity(request.getQuestion(), request.getAnswer(), request.getOptions(),request.isFlip(),request.getCategory());
+        var flashcardEntity = new FlashcardEntity(request.getQuestion(), request.getAnswer(),request.getCategory());
         flashcardEntity  =flashcardRepository.save(flashcardEntity);
         return transformEntity(flashcardEntity);
     }
@@ -44,8 +44,6 @@ public class FlashcardService {
         var flashcardEntity = flashcardEntityOptional.get();
         flashcardEntity.setQuestion(request.getQuestion());
         flashcardEntity.setAnswer(request.getQuestion());
-        flashcardEntity.setOptions(request.getOptions());
-        flashcardEntity.setFlip(request.isFlip());
         flashcardEntity.setCategory(request.getCategory());
         flashcardEntity = flashcardRepository.save(flashcardEntity);
 
@@ -64,8 +62,6 @@ public class FlashcardService {
                 flashcardEntity.getId(),
                 flashcardEntity.getQuestion(),
                 flashcardEntity.getAnswer(),
-                flashcardEntity.getOptions(),
-                flashcardEntity.isFlip(),
                 flashcardEntity.getCategory()
         );
     }
