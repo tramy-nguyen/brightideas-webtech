@@ -22,6 +22,9 @@ public class SetEntity {
     @Enumerated(value = EnumType.STRING)
     private Subject subject;
 
+    @OneToMany(mappedBy = "set", fetch = FetchType.EAGER)
+    private List<FlashcardEntity> deck = new ArrayList<>();
+
 
     public SetEntity(String title, String description, Subject subject) {
         this.title = title;
@@ -57,6 +60,14 @@ public class SetEntity {
 
     public void setSubject(Subject subject) {
         this.subject = subject;
+    }
+
+    public List<FlashcardEntity> getDeck() {
+        return deck;
+    }
+
+    public void setDeck(List<FlashcardEntity> deck) {
+        this.deck = deck;
     }
 
 

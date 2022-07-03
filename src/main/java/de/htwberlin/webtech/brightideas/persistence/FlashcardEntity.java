@@ -19,10 +19,15 @@ public class FlashcardEntity {
     @Column(name = "category")
     private String category;
 
-    public FlashcardEntity (String question, String answer, String category) {
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "set_id", referencedColumnName = "id")
+    private SetEntity set;
+
+    public FlashcardEntity (String question, String answer, String category, SetEntity set) {
         this.question = question;
         this.answer = answer;
         this.category = category;
+        this.set = set;
     }
 
     protected FlashcardEntity() {}
@@ -54,5 +59,13 @@ public class FlashcardEntity {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public SetEntity getSet() {
+        return set;
+    }
+
+    public void setSet(SetEntity set) {
+        this.set = set;
     }
 }

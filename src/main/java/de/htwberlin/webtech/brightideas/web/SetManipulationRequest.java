@@ -8,11 +8,13 @@ public class SetManipulationRequest {
     private String description;
     private String subject;
 
-    public SetManipulationRequest (String title, String description, String subject) {
+    public SetManipulationRequest (String title, String description, String subject ){
         this.title = title;
         this.description = description;
         this.subject = subject;
     }
+
+    public SetManipulationRequest () {}
 
     public String getTitle() {
         return title;
@@ -37,4 +39,5 @@ public class SetManipulationRequest {
     public void setSubject(String subject) {
         this.subject = subject;
     }
+
 }

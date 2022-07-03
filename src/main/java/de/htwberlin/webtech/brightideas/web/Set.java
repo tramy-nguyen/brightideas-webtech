@@ -8,12 +8,14 @@ public class Set {
     private String title;
     private String description;
     private String subject;
+    private List<Flashcard> deck;
 
-    public Set (long id, String title, String description, String subject) {
+    public Set (long id, String title, String description, String subject, List<Flashcard> deck ) {
             this.id = id;
             this.title = title;
             this.description = description;
             this.subject = subject;
+            this.deck = deck;
     }
 
         public long getId() {
@@ -47,6 +49,14 @@ public class Set {
         public void setSubject(String subject) {
             this.subject = subject;
         }
+
+        public List<Flashcard> getDeck() {
+        return deck;
+    }
+
+        public void setDeck(List<Flashcard> deck) {
+        this.deck = deck;
+    }
 
 
 }

@@ -5,11 +5,12 @@ import de.htwberlin.webtech.brightideas.persistence.SetRepository;
 import de.htwberlin.webtech.brightideas.persistence.Subject;
 import de.htwberlin.webtech.brightideas.web.Set;
 import de.htwberlin.webtech.brightideas.web.SetManipulationRequest;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@Service
 public class SetService {
 
     private final SetRepository setRepository;

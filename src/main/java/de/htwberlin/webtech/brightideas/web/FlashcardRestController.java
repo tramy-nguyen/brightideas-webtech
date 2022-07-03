@@ -51,13 +51,4 @@ public class FlashcardRestController {
         return deleted? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 
-
-
-    /**
-     public FlashcardRestController(){
-     this.flashcards = new ArrayList<>();
-     flashcards.add(new Flashcard(1,"Was heißt Katze auf Englisch?", "cat", "dog; pig; cat; meow", false, "Englisch" ));
-     flashcards.add(new Flashcard(2, "Welche Farbe hat der Himmel?", "blau", "blau; grün; lila; braun" ,false, "Kunst"));
-     }
-     */
 }

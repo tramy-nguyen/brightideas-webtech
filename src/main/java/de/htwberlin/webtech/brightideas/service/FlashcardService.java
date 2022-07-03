@@ -2,6 +2,7 @@ package de.htwberlin.webtech.brightideas.service;
 
 import de.htwberlin.webtech.brightideas.persistence.FlashcardEntity;
 import de.htwberlin.webtech.brightideas.persistence.FlashcardRepository;
+import de.htwberlin.webtech.brightideas.persistence.SetRepository;
 import de.htwberlin.webtech.brightideas.web.Flashcard;
 import de.htwberlin.webtech.brightideas.web.FlashcardManipulationRequest;
 import org.springframework.stereotype.Service;
@@ -13,9 +14,11 @@ import java.util.stream.Collectors;
 public class FlashcardService {
 
     private final FlashcardRepository flashcardRepository;
+    private final SetRepository setRepository;
 
-    public FlashcardService(FlashcardRepository flashcardRepository) {
+    public FlashcardService(FlashcardRepository flashcardRepository, SetRepository setRepository) {
         this.flashcardRepository = flashcardRepository ;
+        this.setRepository = setRepository;
     }
 
     public List<Flashcard> findAll() {
@@ -31,7 +34,9 @@ public class FlashcardService {
     }
 
     public Flashcard create(FlashcardManipulationRequest request){
-        var flashcardEntity = new FlashcardEntity(request.getQuestion(), request.getAnswer(),request.getCategory());
+
+        var set = setRepository.findById(request.getSetId()).orElseThrow();
+        var flashcardEntity = new FlashcardEntity(request.getQuestion(), request.getAnswer(),request.getCategory(), set);
         flashcardEntity  =flashcardRepository.save(flashcardEntity);
         return transformEntity(flashcardEntity);
     }
@@ -62,7 +67,8 @@ public class FlashcardService {
                 flashcardEntity.getId(),
                 flashcardEntity.getQuestion(),
                 flashcardEntity.getAnswer(),
-                flashcardEntity.getCategory()
+                flashcardEntity.getCategory(),
+                flashcardEntity.getSet().getId()
         );
     }
 }
