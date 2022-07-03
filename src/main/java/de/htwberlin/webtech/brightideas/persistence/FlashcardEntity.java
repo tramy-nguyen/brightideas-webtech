@@ -30,7 +30,7 @@ public class FlashcardEntity {
         this.set = set;
     }
 
-    protected FlashcardEntity() {}
+    public FlashcardEntity() {}
 
 
     public long getId() {
