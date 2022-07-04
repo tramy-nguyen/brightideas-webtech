@@ -26,9 +26,15 @@ public class SetRestController {
 
     @PostMapping(path = "/api/v1/sets")
     public ResponseEntity<Void> createSet(@RequestBody SetManipulationRequest request) throws URISyntaxException {
-        var set = setService.create(request);
-        URI uri = new URI("/api/v1/sets/" + set.getId());
-        return ResponseEntity.created(uri).build();
+        var valid = validate(request);
+        if(valid) {
+            var set = setService.create(request);
+            URI uri = new URI("/api/v1/sets/" + set.getId());
+            return ResponseEntity.created(uri).build();
+        }
+        else {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @PutMapping(path ="/api/v1/sets/{id}")
@@ -41,6 +47,15 @@ public class SetRestController {
     public ResponseEntity<Void> deleteSet(@PathVariable Long id) {
         boolean deleted = setService.deleteById(id);
         return deleted? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+    }
+
+    private boolean validate(SetManipulationRequest request) {
+        return request.getTitle() != null
+                && !request.getTitle().isBlank()
+                && request.getDescription() != null
+                && !request.getDescription().isBlank()
+                && request.getSubject() != null
+                && !request.getSubject().isBlank();
     }
 
 }

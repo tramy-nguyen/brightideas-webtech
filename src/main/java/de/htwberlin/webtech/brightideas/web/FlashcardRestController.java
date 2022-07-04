@@ -34,9 +34,15 @@ public class FlashcardRestController {
 
     @PostMapping(path = "/api/v1/flashcards")
     public ResponseEntity<Void> createFlashcard(@RequestBody FlashcardManipulationRequest request) throws URISyntaxException {
-        var flashcard= flashcardService.create(request);
-        URI uri = new URI("/api/v1/flashcards/" + flashcard.getId());
-        return ResponseEntity.created(uri).build();
+        var valid = validate(request);
+        if(valid) {
+            var flashcard = flashcardService.create(request);
+            URI uri = new URI("/api/v1/flashcards/" + flashcard.getId());
+            return ResponseEntity.created(uri).build();
+        }
+        else {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @PutMapping(path = "/api/v1/flashcards/{id}")
@@ -49,6 +55,16 @@ public class FlashcardRestController {
     public ResponseEntity<Void> deletePerson(@PathVariable Long id) {
         boolean deleted = flashcardService.deleteById(id);
         return deleted? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+    }
+
+    private boolean validate(FlashcardManipulationRequest request) {
+        return request.getQuestion() != null
+        && !request.getQuestion().isBlank()
+        && request.getAnswer() != null
+        && !request.getAnswer().isBlank()
+        && request.getCategory() != null
+        && !request.getCategory().isBlank()
+        && request.getSetId() != null;
     }
 
 }
